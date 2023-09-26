@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    Welcome to Expence Count
+    <div class="section">
+        <div class="input">
+            <form method="POST" action="{% url 'index' %}">{% csrf_token %}
+                <p class="cat">Payment Type:</p>
+                <select name="pt" id="pt">
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Donation">Donation</option>
+                    <option value="Others">Others</option>
+                </select>
+
+                <p class="cat">Transaction Type:</p>
+                <select name="tt" id="tt">
+                    <option value="Debit">Debit</option>
+                    <option value="Credit">Credit</option>
+                </select>
+
+                <p class="cat"> Rs: </p>
+                <input type="number" name="rs">
+
+                <p class="cat">Comment (if any):</p>
+                <input type="text" name="comment">
+
+                <p>Date:</p>
+                <input type="date" name="date" id="">
+
+                <button>Add</button>
+            </form>
+        </div>
+        <div class="output">
+            <h3>Total Expence -> {{total_spend}}</h3>
+            {% for item in all_data reversed %}
+            <p>{{ item.Payment_Type }}-{{ item.Transaction_Type }}-{{ item.Rs }}-{{ item.Comment }}-{{ item.Date }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
